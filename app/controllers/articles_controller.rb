@@ -2,7 +2,7 @@
 
 # ArticlesController
 class ArticlesController < ApplicationController
-  before_action :set_article, only: :show
+  before_action :set_article, only: %i[show edit update]
 
   def show; end
 
@@ -10,9 +10,19 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
+  def edit; end
+
   def create
     @article = Article.create(article_params)
     render json: @article
+  end
+
+  def update
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render json: @article.errors
+    end
   end
 
   private
