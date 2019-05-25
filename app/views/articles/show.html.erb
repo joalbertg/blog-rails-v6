@@ -1,6 +1,9 @@
 <% if @article %>
   <h1><%= @article.title %></h1>
   <div><%= @article.content %></div>
+  <div>
+    <%= link_to 'Delete', article_path(@article), method: :delete %>
+  </div>
 <% else %>
   <div><h1>Article not found </h1></div>
 <% end %>

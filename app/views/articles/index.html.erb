@@ -1,0 +1,8 @@
+<% if @articles.any? %>
+  <% @articles.each do |article| %>
+    <%= article.id %>
+    <%= article.title %>
+  <% end %>
+<% else %>
+  <h1>Articles not found</h1>
+<% end %>

@@ -2,7 +2,11 @@
 
 # ArticlesController
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[show edit update]
+  before_action :set_article, only: %i[show edit update destroy]
+
+  def index
+    @articles = Article.all
+  end
 
   def show; end
 
@@ -20,6 +24,14 @@ class ArticlesController < ApplicationController
   def update
     if @article.update(article_params)
       redirect_to @article
+    else
+      render json: @article.errors
+    end
+  end
+
+  def destroy
+    if @article.destroy
+      redirect_to articles_path
     else
       render json: @article.errors
     end
