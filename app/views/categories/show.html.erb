@@ -1,0 +1,10 @@
+<div class="large-container center-block">
+<% if @category&.articles&.any? %>
+  <h1>Articles published in <%= @category.title %></h1>
+  <%= render partial: :article, collection: @category.articles %>
+<% elsif @category.nil? %>
+  <h1>Category not found</h1>
+<% else %>
+  <h1>Articles not found</h1>
+<% end %>
+</div>

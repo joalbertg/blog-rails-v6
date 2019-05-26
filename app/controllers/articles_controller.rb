@@ -13,17 +13,22 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @categories = Category.all
   end
 
-  def edit; end
+  def edit
+    @categories = Category.all
+  end
 
   def create
     @article = current_user.articles.create(article_params)
+    @article.save_categories
     redirect_to article_path @article
   end
 
   def update
     if @article.update(article_params)
+      @article.save_categories
       redirect_to @article
     else
       render json: @article.errors
@@ -47,11 +52,13 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(
       :title,
-      :content
+      :content,
+      category_elements: []
     )
   end
 
   def set_article
-    @article = Article.find_by(id: params[:id])
+    @article = Article.includes(:rich_text_content, :user)
+                      .find_by(id: params[:id])
   end
 end
