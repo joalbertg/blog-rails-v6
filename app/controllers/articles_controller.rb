@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
   def edit; end
 
   def create
-    @article = Article.create(article_params)
+    @article = current_user.articles.create(article_params)
     redirect_to article_path @article
   end
 
@@ -36,6 +36,10 @@ class ArticlesController < ApplicationController
     else
       render json: @article.errors
     end
+  end
+
+  def from_author
+    @user = User.find_by(id: params[:user_id])
   end
 
   private

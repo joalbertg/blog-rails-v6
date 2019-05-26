@@ -1,0 +1,10 @@
+<div class="large-container center-block">
+<% if @user&.articles&.any? %>
+  <h1>Articles published by <%= @user.email %></h1>
+  <%= render partial: :article, collection: @user.articles %>
+<% elsif @user.nil? %>
+  <h1>User not found</h1>
+<% else %>
+  <h1>Articles not found</h1>
+<% end %>
+</div>
