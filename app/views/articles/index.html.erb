@@ -1,5 +1,8 @@
+<div class="large-container center-block">
 <% if @articles.any? %>
-    <%= render partial: :article, collection: @articles %>
+  <h1>My articles</h1>
+  <%= render partial: :article, collection: @articles %>
 <% else %>
   <h1>Articles not found</h1>
 <% end %>
+</div>
