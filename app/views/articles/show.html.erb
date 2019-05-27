@@ -3,6 +3,9 @@
   <h1><%= @article.title %></h1>
   <div>
     <p>Written by <strong><%= @article.user.email %></strong></p>
+    <% if @article.user.avatar.attached? %>
+      <%= image_tag url_for(@article.user.avatar), height: 30 %>
+    <% end %>
   </div>
   <div><%= @article.content %></div>
   <div class="margin-top">

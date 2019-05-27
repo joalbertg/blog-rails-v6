@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  get :profile, to: 'users#edit'
+
+  resources :users, only: :update
   resources :articles do
     collection do
       get 'user/:user_id', to: 'articles#from_author'
